@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import HOST from '../config';
 
 export default class CommentForm extends Component {
     constructor() {
@@ -25,7 +26,7 @@ export default class CommentForm extends Component {
         const comment = {
             comment: this.state
         };
-        fetch('https://ancient-bobcat-26.localtunnel.me/comments/add', {
+        fetch(HOST + '/comments/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Folder from './Folder';
 import { connect } from 'react-redux';
+import { List } from '@material-ui/core';
 
 const mapStateToProps = state => ({
     tree: state.tree.fileTree
@@ -20,7 +21,9 @@ class connectedFolderList extends Component {
         );
         return (
             <div>
-                {folders}
+                <List>
+                    {folders}
+                </List>
             </div>
         )
     }

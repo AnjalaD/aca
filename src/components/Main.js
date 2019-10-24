@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import FolderList from './FolderList';
-import SearchBar from './SearchBar';
-import { Container, CircularProgress } from '@material-ui/core';
-import FileList from './FileList';
-import SideBar from './SideBar';
-import Home from './Home';
+import FolderViewGrid from './FolderViewGrid';
 import { connect } from 'react-redux';
 import { onFirstLoad } from '../actions';
+import { Container, CircularProgress, Box } from '@material-ui/core';
+import Header from './Header';
+import FileView from './FileView';
+import HOST from '../config';
 
 const mapStateToProps = state => ({
     searchFile: state.searchFile
@@ -19,7 +18,7 @@ class connectedMain extends Component {
         this.state = {
             loading: true
         };
-        this.URL = 'https://strange-elephant-82.localtunnel.me';
+        this.URL = HOST;
     }
 
     componentDidMount() {
@@ -60,17 +59,13 @@ class connectedMain extends Component {
 
     render() {
         const content = (
-            <Container>
-                <div>
-                    <Home />
-                    <SearchBar />
-                </div>
-                <div>
-                    <FolderList />
-                    <FileList />
-                    <SideBar />
-                </div>
-            </Container>
+            <Box height="100%">
+                <Container>
+                    <Header />
+                    <FolderViewGrid />
+                    <FileView />
+                </Container>
+            </Box>
         );
 
         const loading = (

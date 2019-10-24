@@ -31,3 +31,12 @@ export const searchFile = (fileName = '') => ({
     payload: fileName
 });
 
+export const selectFile = (file = null) => ({
+    type: 'SELECT_FILE',
+    payload: file
+});
+
+export const removeFile = (file) => ({
+    type: 'REMOVE_FILE',
+    payload: file
+});

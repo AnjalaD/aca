@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, IconButton } from '@material-ui/core';
+import { Paper, InputBase, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { connect } from 'react-redux';
 import { searchFile, selectModule } from '../actions';
@@ -23,22 +23,25 @@ class connectedSearchBar extends Component {
     render() {
         const dispatch = this.props.dispatch;
         return (
-            <div>
-                <Input
+
+            <Paper >
+                <InputBase
                     name='search'
-                    type='text'
                     value={this.state.search}
                     onChange={this.fieldChangeHandler}
-                    label='search'
-                ></Input>
+                    placeholder="Search for files"
+                // inputProps={{ 'aria-label': 'search google maps' }}
+                />
                 <IconButton
-                    children={<SearchIcon />}
+                    aria-label="search"
                     onClick={e => {
                         dispatch(selectModule(-1));
                         dispatch(searchFile(this.state.search));
                     }}
-                />
-            </div>
+                >
+                    <SearchIcon />
+                </IconButton>
+            </Paper>
         )
     }
 }
