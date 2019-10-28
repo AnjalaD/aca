@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FolderViewGrid from './FolderViewGrid';
 import { connect } from 'react-redux';
 import { onFirstLoad } from '../actions';
-import { Container, CircularProgress, Box } from '@material-ui/core';
+import { CircularProgress, Grid } from '@material-ui/core';
 import Header from './Header';
 import FileView from './FileView';
 import HOST from '../config';
@@ -14,7 +14,6 @@ const mapStateToProps = state => ({
 class connectedMain extends Component {
     constructor(props) {
         super(props);
-        console.log('main props', props);
         this.state = {
             loading: true
         };
@@ -59,20 +58,21 @@ class connectedMain extends Component {
 
     render() {
         const content = (
-            <Box height="100%">
-                <Container>
-                    <Header />
-                    <FolderViewGrid />
-                    <FileView />
-                </Container>
-            </Box>
+            <Grid
+                container
+                direction="column"
+            >
+                <Header />
+                <FolderViewGrid />
+                <FileView />
+            </Grid>
         );
 
         const loading = (
-            <div>
+            <Grid container justify="center" alignItems="center">
                 <CircularProgress />
                 <p>Loading...</p>
-            </div>
+            </Grid>
         )
 
         if (this.state.loading) {

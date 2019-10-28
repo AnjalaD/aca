@@ -3,17 +3,16 @@ import FileLink from './FileLink';
 import { Typography, CircularProgress } from '@material-ui/core';
 import HOST from '../config';
 import { connect } from 'react-redux';
+import { addLinks } from '../actions';
 
-const mapStateToProps = (state) => ({
-    selected: state.file.selected
+const mapStateToProps = ({ file }) => ({
+    selected: file.selected,
+    links: file.links
 });
 
 class connectedFileLinks extends Component {
     constructor() {
         super();
-        this.state = {
-            links: null
-        }
         this.fetchData = this.fetchData.bind(this);
     }
 
@@ -31,7 +30,7 @@ class connectedFileLinks extends Component {
         // console.log('filelinks on mount', this.props.selected);
         fetch(HOST + '/documents/linked', options)
             .then(res => res.json())
-            .then(res => { this.setState({ links: res.data }) })
+            .then(res => { this.props.dispatch(addLinks(res.data)) })
             .catch(err => console.log(err));
     }
 
@@ -40,7 +39,9 @@ class connectedFileLinks extends Component {
     }
 
     componentDidUpdate() {
-        this.fetchData();
+        if (this.props.links === null) {
+            this.fetchData();
+        }
     }
 
     render() {
@@ -50,15 +51,18 @@ class connectedFileLinks extends Component {
                 <p>Loading...</p>
             </div>
         );
-
         const noLinks = <Typography>No Links Found</Typography>
+
+        const links = this.props.links;
         let display = loading;
         let key = 0;
 
-        if (this.state.links !== null && this.state.links.length === 0) {
+        if (links === null) {
+            display = loading;
+        } else if (links.length === 0) {
             display = noLinks;
-        } else if (this.state.links !== null && this.state.links.length > 0) {
-            display = this.state.links.map(
+        } else if (links.length > 0) {
+            display = links.map(
                 link => <FileLink data={link} key={key++} />
             );
         }

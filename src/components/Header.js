@@ -1,14 +1,18 @@
 import React from 'react';
 // import { Box } from '@material-ui/core';
-import Home from './Home';
+// import Home from './Home';
 import SearchBar from './SearchBar';
+import { Grid } from '@material-ui/core';
 
 const Header = () => {
     return (
-        <div>
-            <Home />
+        <Grid
+            container
+            justify="center"
+        >
+            {/* <Home /> */}
             <SearchBar />
-        </div>
+        </Grid>
     )
 }
 

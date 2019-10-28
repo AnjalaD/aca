@@ -40,3 +40,13 @@ export const removeFile = (file) => ({
     type: 'REMOVE_FILE',
     payload: file
 });
+
+export const addComments = (comments) => ({
+    type: 'ADD_COMMENTS',
+    payload: comments
+});
+
+export const addLinks = (links) => ({
+    type: 'ADD_LINKS',
+    payload: links
+});

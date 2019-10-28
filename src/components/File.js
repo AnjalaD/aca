@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardContent, Avatar, IconButton, Typography, Divider, Link, CardActions, Button } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from '@material-ui/icons/DeleteOutlined';
 import { selectFile } from '../actions';
 
 const connectFile = ({ data, dispatch }) => {
-    console.log(data)
     const { document_name, description, date_created } = data;
     return (
         <Card >
@@ -16,7 +15,7 @@ const connectFile = ({ data, dispatch }) => {
                     </Avatar>
                 }
                 action={
-                    <IconButton aria-label="settings">
+                    <IconButton aria-label="settings" size="small" color="secondary">
                         <DeleteIcon />
                     </IconButton>
                 }
@@ -28,15 +27,10 @@ const connectFile = ({ data, dispatch }) => {
                 <Typography variant="body2" color="textPrimary" component="p">
                     {description}
                 </Typography>
-                <Divider></Divider>
-                <Typography>
-                    <Link href="#">
-                        Link
-                    </Link>
-                </Typography>
             </CardContent>
             <CardActions>
                 <Button
+                    variant="outlined"
                     onClick={e => dispatch(selectFile(data))}
                 >
                     Open

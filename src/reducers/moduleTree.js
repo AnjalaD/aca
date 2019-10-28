@@ -8,7 +8,8 @@ const treeReducer = (state = initState, action) => {
     switch (action.type) {
         case 'ON_FIRST_LOAD':
             return Object.assign({}, state, {
-                fileTree: action.payload
+                fileTree: action.payload,
+                selectedModule: action.payload.length > 0 ? action.payload[0].module_id : -1
             });
         case 'HOME':
             return null;

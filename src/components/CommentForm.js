@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import HOST from '../config';
+import { connect } from 'react-redux';
+import { TextField, Button, FormGroup } from '@material-ui/core';
 
-export default class CommentForm extends Component {
+const mapStateToProps = ({ file }) => ({
+    selected: file.selected
+});
+
+class connectsCommentForm extends Component {
     constructor() {
         super();
         this.state = {
-            document_id: 1,
             author_name: '',
             description: ''
         }
@@ -21,10 +26,14 @@ export default class CommentForm extends Component {
         });
     }
 
-    submitHandler(e) {
+    submitHandler(e, document_id) {
         e.preventDefault();
         const comment = {
-            comment: this.state
+            comment: {
+                document_id: document_id,
+                author_name: this.state.author_name,
+                description: this.state.description
+            }
         };
         fetch(HOST + '/comments/add', {
             method: 'POST',
@@ -32,27 +41,48 @@ export default class CommentForm extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(comment)
-        }).then(res => console.log(res))
+        })
+            .then(res => console.log(res))
             .catch(err => console.log(err))
     }
 
     render() {
         return (
-            <form onSubmit={this.submitHandler}>
-                <input
+            <FormGroup
+                onSubmit={e => this.submitHandler(e, this.props.selected)}
+            >
+                <TextField
+                    label="Name"
+                    margin="dense"
+                    variant="outlined"
                     name='author_name'
                     type='text'
                     value={this.state.author_name}
                     onChange={this.fieldChangeHandler}
-                ></input>
-                <input
+                    autoComplete="off"
+                ></TextField>
+                <TextField
+                    multiline
+                    rows="3"
+                    label="Comment"
+                    margin="dense"
+                    variant="outlined"
                     name='description'
                     type='text'
                     value={this.state.description}
                     onChange={this.fieldChangeHandler}
-                ></input>
-                <button>Add Comment</button>
-            </form>
+                    autoComplete="off"
+                ></TextField>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                >
+                    Add Comment
+                </Button>
+            </FormGroup>
         )
     }
 }
+
+const CommentForm = connect(mapStateToProps)(connectsCommentForm);
+export default CommentForm; 

@@ -67,7 +67,6 @@ class connectedTabView extends Component {
 
         let key = 0;
         const value = this.props.selected;
-        console.log(value);
         const tabPanels = this.props.files.map(file => (
             <TabPanel value={value} index={file.id} key={key++}>
                 {file.document_url}
@@ -101,6 +100,7 @@ class connectedTabView extends Component {
                     indicatorColor="primary"
                     textColor="primary"
                     variant="scrollable"
+                    scrollButtons="auto"
                 >
                     {tabs}
                 </Tabs>

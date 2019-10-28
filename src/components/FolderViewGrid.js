@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import FolderList from './FolderList';
 import FileList from './FileList';
-import SideBar from './SideBar';
-import { Grid, Box, Paper, Slide } from '@material-ui/core';
+import { Grid, Paper, Slide, Box } from '@material-ui/core';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
@@ -16,32 +15,34 @@ class connectedFolderViewGrid extends Component {
 
     render() {
         return (
-            <Box clone height="70vh">
-                <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-                    <Paper elevation={2}>
-                        <Grid container>
-                            <Grid item xs={12} md={3} height="100vh">
-                                <FolderList />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <Box clone height="100%" p={1}>
-                                    <Paper
-                                        square
-                                        bgcolor="secondary.main"
-                                        elevation={2}
-                                        height="80vh"
-                                    >
-                                        <FileList />
-                                    </Paper>
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12} md={3}>
-                                <SideBar />
-                            </Grid>
+
+            <Slide direction="left" in={true} mountOnEnter unmountOnExit>
+                <Box
+                    pt={8}
+                >
+                    <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                    >
+                        <Grid item xs={11} sm={3} lg={2}>
+                            <FolderList />
                         </Grid>
-                    </Paper>
-                </Slide>
-            </Box>
+                        <Grid item xs={11} sm={8} lg={10}>
+                            <Paper
+                                square
+                            >
+                                <Box
+                                    bgcolor="rgb(63, 81, 155)"
+                                >
+                                    <FileList />
+                                </Box>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </Slide>
+
         )
     }
 }

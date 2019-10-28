@@ -3,17 +3,16 @@ import Comment from './Comment';
 import { CircularProgress, Typography } from '@material-ui/core';
 import HOST from '../config';
 import { connect } from 'react-redux';
+import { addComments } from '../actions';
 
 const mapStateToProps = ({ file }) => ({
-    selected: file.selected
+    selected: file.selected,
+    comments: file.comments
 });
 
 class connectedComments extends Component {
     constructor() {
         super();
-        this.state = {
-            comments: null
-        }
         this.fetchData = this.fetchData.bind(this);
     }
 
@@ -31,7 +30,7 @@ class connectedComments extends Component {
 
         fetch(HOST + '/comments', options)
             .then(res => res.json())
-            .then(res => { this.setState({ comments: res.data }); console.log(res.data) })
+            .then(res => { this.props.dispatch(addComments(res.data)); console.log(res.data) })
             .catch(err => console.log(err));
     }
 
@@ -40,7 +39,9 @@ class connectedComments extends Component {
     }
 
     componentDidUpdate() {
-        this.fetchData();
+        if (this.props.comments === null) {
+            this.fetchData();
+        }
     }
 
     render() {
@@ -55,11 +56,14 @@ class connectedComments extends Component {
 
         let display = loading;
         let key = 0;
+        const comments = this.props.comments;
 
-        if (this.state.comments !== null && this.state.comments.length === 0) {
+        if (comments === null) {
+            display = loading;
+        } else if (comments.length === 0) {
             display = noComments;
-        } else if (this.state.comments !== null && this.state.comments.length > 0) {
-            display = this.state.comments.map(
+        } else if (comments.length > 0) {
+            display = comments.map(
                 comment => <Comment data={comment} key={key++} />
             );
         }

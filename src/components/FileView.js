@@ -13,33 +13,37 @@ const mapStateToProps = (state) => ({
 
 const connectedFileView = ({ files, selected, dispatch }) => {
     const content = (
-        <Box clone height="70vh">
-            <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-                <Paper elevation={2}>
-                    <Grid container>
-                        <Grid item xs={12} md={3} height="100vh">
-                            <FileLinks />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <Box clone height="100%" p={1}>
-                                <Paper
-                                    square
-                                    bgcolor="secondary.main"
-                                    elevation={2}
-                                    height="80vh"
-                                >
-                                    <TabView />
-                                </Paper>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} md={3}>
-                            <Comments />
-                            <CommentForm />
-                        </Grid>
+        <Slide direction="left" in={true} mountOnEnter unmountOnExit>
+            <Grid
+                container
+                direction="column"
+                alignItems="center"
+            >
+                <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                >
+                    <Grid item sm={11} md={8}>
+                        <Box>
+                            <Paper
+                                square
+                                bgcolor="secondary.main"
+                            >
+                                <TabView />
+                            </Paper>
+                        </Box>
                     </Grid>
-                </Paper>
-            </Slide>
-        </Box>
+                    <Grid item xs={11} md={3}>
+                        <FileLinks />
+                    </Grid>
+                </Grid>
+                <Grid container direction="column">
+                    <Comments />
+                    <CommentForm />
+                </Grid>
+            </Grid>
+        </Slide>
     );
 
     let display = '';
