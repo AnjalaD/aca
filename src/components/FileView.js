@@ -1,7 +1,6 @@
 import React from 'react';
-import { Box, Slide, Grid, Paper } from '@material-ui/core';
+import { Slide, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
-import CommentForm from './CommentForm';
 import Comments from './Comments';
 import FileLinks from './FileLinks';
 import TabView from './TabView';
@@ -17,30 +16,21 @@ const connectedFileView = ({ files, selected, dispatch }) => {
             <Grid
                 container
                 direction="column"
-                alignItems="center"
             >
                 <Grid
                     container
                     direction="row"
                     justify="center"
                 >
-                    <Grid item sm={11} md={8}>
-                        <Box>
-                            <Paper
-                                square
-                                bgcolor="secondary.main"
-                            >
-                                <TabView />
-                            </Paper>
-                        </Box>
+                    <Grid item xm={12} sm={12} md={9}>
+                        <TabView />
                     </Grid>
-                    <Grid item xs={11} md={3}>
+                    <Grid item xs={12} md={3}>
                         <FileLinks />
                     </Grid>
                 </Grid>
-                <Grid container direction="column">
+                <Grid item sm={12} xm={12} md={9}>
                     <Comments />
-                    <CommentForm />
                 </Grid>
             </Grid>
         </Slide>

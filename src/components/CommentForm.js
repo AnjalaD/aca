@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import HOST from '../config';
 import { connect } from 'react-redux';
-import { TextField, Button, FormGroup } from '@material-ui/core';
+import { TextField, Button, Box, Grid, FormControl } from '@material-ui/core';
 
 const mapStateToProps = ({ file }) => ({
     selected: file.selected
 });
 
-class connectsCommentForm extends Component {
+class connectedCommentForm extends Component {
     constructor() {
         super();
         this.state = {
@@ -48,41 +48,51 @@ class connectsCommentForm extends Component {
 
     render() {
         return (
-            <FormGroup
-                onSubmit={e => this.submitHandler(e, this.props.selected)}
-            >
-                <TextField
-                    label="Name"
-                    margin="dense"
-                    variant="outlined"
-                    name='author_name'
-                    type='text'
-                    value={this.state.author_name}
-                    onChange={this.fieldChangeHandler}
-                    autoComplete="off"
-                ></TextField>
-                <TextField
-                    multiline
-                    rows="3"
-                    label="Comment"
-                    margin="dense"
-                    variant="outlined"
-                    name='description'
-                    type='text'
-                    value={this.state.description}
-                    onChange={this.fieldChangeHandler}
-                    autoComplete="off"
-                ></TextField>
-                <Button
-                    variant="outlined"
-                    color="primary"
-                >
-                    Add Comment
-                </Button>
-            </FormGroup>
+            <Box p={2}>
+                <Grid container direction="row" alignItems="center">
+                    <Grid item xs={12} sm={3}>
+                        <FormControl fullWidth>
+                            <TextField
+                                label="Name"
+                                margin="dense"
+                                variant="outlined"
+                                name='author_name'
+                                type='text'
+                                value={this.state.author_name}
+                                onChange={this.fieldChangeHandler}
+                                autoComplete="off"
+                            ></TextField>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12} sm={7}>
+                        <FormControl fullWidth>
+                            <TextField
+                                multiline
+                                label="Comment"
+                                margin="dense"
+                                variant="outlined"
+                                name='description'
+                                type='text'
+                                value={this.state.description}
+                                onChange={this.fieldChangeHandler}
+                                autoComplete="off"
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12} sm={2}>
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={e => this.submitHandler(e, this.props.selected)}
+                        >
+                            Add Comment
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Box>
         )
     }
 }
 
-const CommentForm = connect(mapStateToProps)(connectsCommentForm);
+const CommentForm = connect(mapStateToProps)(connectedCommentForm);
 export default CommentForm; 

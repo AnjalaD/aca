@@ -60,20 +60,6 @@ const styles = {
     }
 };
 class styledSearchBar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            search: ''
-        };
-        this.fieldChangeHandler = this.fieldChangeHandler.bind(this);
-    }
-
-    fieldChangeHandler(e) {
-        const { name, value } = e.target;
-        this.setState({
-            [name]: value
-        });
-    }
 
     render() {
         const dispatch = this.props.dispatch;
@@ -95,7 +81,7 @@ class styledSearchBar extends Component {
                             }}
                             onKeyUp={e => {
                                 dispatch(selectModule(-1));
-                                dispatch(searchFile(this.state.search));
+                                dispatch(searchFile(e.target.value));
                             }}
                             inputProps={{ "aria-label": "search" }}
                         />

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Comment from './Comment';
-import { CircularProgress, Typography } from '@material-ui/core';
+import { CircularProgress, Typography, Grid, Box, Paper } from '@material-ui/core';
 import HOST from '../config';
 import { connect } from 'react-redux';
 import { addComments } from '../actions';
+import CommentForm from './CommentForm';
 
 const mapStateToProps = ({ file }) => ({
     selected: file.selected,
@@ -64,14 +65,36 @@ class connectedComments extends Component {
             display = noComments;
         } else if (comments.length > 0) {
             display = comments.map(
-                comment => <Comment data={comment} key={key++} />
+                comment => (
+                    <Grid item xs={12} sm={12} key={key++}>
+                        <Comment data={comment} />
+                    </Grid>
+                )
             );
         }
 
         return (
-            <div>
-                {display}
-            </div>
+            <Box p={2}>
+                <Paper>
+                    <Grid container justify="center">
+                        <Grid item xs={12}>
+                            <Typography variant="h5">
+                                Comments
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <CommentForm />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Box p={2}>
+                                <Grid container spacing={1}>
+                                    {display}
+                                </Grid>
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </Paper>
+            </Box>
         )
     }
 }

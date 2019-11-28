@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-import { Tabs, Tab, Card, Box, Typography, IconButton } from '@material-ui/core';
+import { Tabs, Tab, Card, Box, Typography, IconButton, Paper } from '@material-ui/core';
 import Close from '@material-ui/icons/Close';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
@@ -75,6 +74,7 @@ class connectedTabView extends Component {
 
         const tabs = this.props.files.map(file => (
             <Tab
+
                 component="div"
                 label={
                     <Typography>
@@ -94,18 +94,20 @@ class connectedTabView extends Component {
         ));
 
         return (
-            <div >
-                <Tabs
-                    value={value}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    variant="scrollable"
-                    scrollButtons="auto"
-                >
-                    {tabs}
-                </Tabs>
-                {tabPanels}
-            </div>
+            <Box p={2}>
+                <Paper>
+                    <Tabs
+                        value={value}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        variant="scrollable"
+                        scrollButtons="auto"
+                    >
+                        {tabs}
+                    </Tabs>
+                    {tabPanels}
+                </Paper>
+            </Box>
         )
     }
 

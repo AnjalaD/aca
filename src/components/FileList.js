@@ -55,7 +55,8 @@ class connectedFileList extends Component {
                     direction="column"
                 >
                     <Box
-                        minHeight={600}>
+                        minHeight={600}
+                    >
                         <Grid
                             container
                             spacing={2}
@@ -77,7 +78,7 @@ class connectedFileList extends Component {
                         </Grid>
                     </Grid>
                 </Grid>
-            </Box>
+            </Box >
 
         )
     }

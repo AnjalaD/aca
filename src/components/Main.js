@@ -6,6 +6,7 @@ import { CircularProgress, Grid } from '@material-ui/core';
 import Header from './Header';
 import FileView from './FileView';
 import HOST from '../config';
+import Forms from './Forms';
 
 const mapStateToProps = state => ({
     searchFile: state.searchFile
@@ -65,6 +66,7 @@ class connectedMain extends Component {
                 <Header />
                 <FolderViewGrid />
                 <FileView />
+                <Forms />
             </Grid>
         );
 

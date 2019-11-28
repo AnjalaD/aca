@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, CardHeader, CardContent, Avatar, IconButton, Typography, Divider, Link, CardActions, Button } from '@material-ui/core';
+import { Card, CardHeader, CardContent, Avatar, IconButton, Typography, CardActions, Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/DeleteOutlined';
 import { selectFile } from '../actions';
 

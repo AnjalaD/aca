@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FileLink from './FileLink';
-import { Typography, CircularProgress } from '@material-ui/core';
+import { Typography, CircularProgress, Box, Paper, Grid } from '@material-ui/core';
 import HOST from '../config';
 import { connect } from 'react-redux';
 import { addLinks } from '../actions';
@@ -68,9 +68,21 @@ class connectedFileLinks extends Component {
         }
 
         return (
-            <div>
-                {display}
-            </div>
+            <Box p={2}>
+                <Paper>
+                    <Grid container direction="column">
+                        <Grid item xs={12}>
+                            <Typography variant="h5">
+                                Linked Documents
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            {display}
+                        </Grid>
+                    </Grid>
+                </Paper>
+            </Box>
+
         )
     }
 }
